@@ -4,13 +4,13 @@
 ------------------
 
 
-Adım 1:
+Step 1:
 ![Homepage](img/index.png)
 
-Adım 2:
+Step 2:
 ![Product page](img/urunler.png)
 
-Adım3: 
+Step: 
 ![Similarity page](img/similarity.png)
 
 
