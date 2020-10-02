@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>{{category}} - Ürün Karşılaştırması</title>
+
+	<link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}">
+
+	<script src="https://kit.fontawesome.com/7b49efd10b.js" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<style type="text/css">
+		body{
+			background-color: black;
+		}
+
+		h1,h2,h3,h4,h5,h6, p{
+			color: white;
+		}
+
+		.jumbotron{
+			background-color: darkslategray;
+		} 
+
+		.urun-info{
+			color: white;
+			background-color: black;
+		}
+
+		td{
+			color: white;
+			background-color: black;
+		}
+
+		th, td{
+			font-weight: bold;
+		}
+
+		.footer{
+		   position: fixed;
+		   background-color: darkslategray;
+		   left: 0;
+		   bottom: 0;
+		   width: 100%;
+		   color: red;
+		   text-align: center;
+	    }
+
+	    #visible{
+			display: block;
+		}
+
+		#unvisible{
+			display: none;
+		}
+
+
+	</style>
+
+</head>
+<body>
+
+
+	<div class="jumbotron text-center">
+		<h1>Ürün Karşılaştırmaları</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="row" width="30%"><h5 class="urun-info">Ürün - 1</h5></th>
+					<th scope="row" width="30%"><h5 class="urun-info">Ürün - 2</h5></th>
+					<th scope="row" width="10%"><h5 class="urun-info">Levenshtein Distance</h5></th>
+					<th scope="row" width="10%"><h5 class="urun-info">Sorted Levenshtein Distance</h5></th>
+					<th scope="row" width="10%"><h5 class="urun-info">Jaccard Similarity</h5></th>
+					<th scope="row" width="10%"><h5 class="urun-info">Match Score</h5></th>
+					<!--<th scope="row" width="10%"><h5 class="urun-info">Site</h5></th>-->
+				</tr>
+			</thead>
+			<tbody>
+				{% for ind in similarity_df.index %}
+				<tr>
+					<td>{{ similarity_df['marka_1'][ind] }}</td>
+					
+					<td>{{ similarity_df['marka_2'][ind] }}</td>
+
+					<td>{{ similarity_df['levenshtein_distance'][ind] }}</td>
+
+					<td>{{ similarity_df['sorted_levenshtein_rate'][ind] }}</td>
+
+					<td>{{ similarity_df['jaccard_similarity'][ind] }}</td>
+
+					<td>{{ similarity_df['match_score'][ind] }}</td>
+
+				</tr>
+				{% endfor %}
+		</tbody>
+	</table>
+	</div>
+
+	
+
+<!--
+	<div class="container">
+		<div class="embed-responsive embed-responsive-16by9">
+			Container
+		</div>
+	</div>
+-->
+	<!--<div class="footer">
+		
+		<form id="visible" action="{{ url_for('urun_karsilastirmasi') }}" method="post" >
+			<div class="float-right"><button type="submit" onclick="change()" class="btn btn-warning" value="Search">Ürünleri Karşılaştır</button></div>
+		</form>
+
+		<form id="visible" action="{{ url_for('home') }}" method="post">
+			<div class="float-left"><button class="btn btn-info" href="{{ url_for('home') }}">Kategori Seçimine Geri Dön</button></div>
+		</form>
+
+		<center>
+			<button id="unvisible" class="btn btn-success">
+				<span class="spinner-border spinner-border-xl"></span>
+			  	 Ürünler Karşılaştırılıyor. <br> Bu işlem yaklaşık 20 saniye sürebilir. Lütfen Bekleyiniz ...
+			</button>
+		</center>
+
+	</div>-->
+
+
+	<script type="text/javascript">
+		function change()
+		{
+			var hiddenItem = document.getElementById("unvisible").style.display = 'block';
+
+			var visibleItems = document.querySelectorAll('[id="visible"]') 
+
+			for(i=0; i<visibleItems.length; i++)
+			{
+				visibleItems[i].style.display = 'none';
+			}
+		}
+	</script>
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+	
+
+</body>
+</html>
